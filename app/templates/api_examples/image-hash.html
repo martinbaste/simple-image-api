@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Image Hash Example</title>
+  </head>
+
+  <body>
+    <h1>Image Hash Example</h1>
+
+    <h2>Request format</h2>
+    <pre>
+        Endpoint: /api/image-difference
+        Method: POST
+        Content-Type: multipart/form-data
+        Body:
+            image: <image>
+    </pre>
+
+    <h2>Response format</h2>
+    <pre>
+        {
+            "status": "success",
+            "data": {
+                "hash": <hash>
+            }
+        }
+    </pre>
+
+    <h2>Example</h2>
+    <form action="/api/image-hash" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" />
+        <input type="submit" value="Submit" />
+    </form>
+
+  </body>
+</html>

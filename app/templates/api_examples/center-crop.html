@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Center Crop Example</title>
+  </head>
+
+  <body>
+    <h1>Center Crop Example</h1>
+
+    <h2>Request format</h2>
+    <pre>
+        Endpoint: /api/center-crop
+        Method: POST
+        Content-Type: multipart/form-data
+        Body:
+            width: <width>
+            height: <height>
+            image: <image>
+    </pre>
+
+    <h2>Response format</h2>
+    <pre>
+        {
+            "status": "success",
+            "data": {
+                "image": <image>
+            }
+        }
+    </pre>
+
+    <h2>Example</h2>
+    <form action="/api/center-crop" method="POST" enctype="multipart/form-data">
+        <input type="number" name="width" placeholder="width" />
+        <input type="number" name="height" placeholder="height" />
+        <input type="file" name="image" />
+        <input type="submit" value="Submit" />
+    </form>
+
+  </body>
+</html>
