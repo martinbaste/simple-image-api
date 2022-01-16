@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, send_file
 
 import services.image as image_service
+from services.utils import get_images_from_request
 
 app = Flask(__name__)
 
@@ -36,16 +37,12 @@ def center_crop():
     except ValueError:
         return "width and height must be integers", 400
 
-    img_file = request.files.get("image")
-    if not img_file:
-        return "image file is required", 400
+    # Get image from request
+    validated = get_images_from_request(request)
+    if validated['files'] is None:
+        return validated['error'], validated['status']
 
-    img_format = img_file.filename.split(".")[-1]
-    if not img_format in ["jpg", "jpeg", "png"]:
-        return "invalid format", 400
-
-    img_buf = image_service.center_crop(img_file, width, height)
-
+    img_buf, img_format = image_service.center_crop(validated['files'][0], width, height)
     return send_file(img_buf, mimetype="image/" + img_format)
 
 @app.route("/api/image-difference", methods=["POST"])
@@ -53,40 +50,26 @@ def image_difference():
     """
     Given two images, return the difference between them
     """
-    img_file_1 = request.files.get("image1")
-    if not img_file_1:
-        return "image1 is required", 400
+    # Get images from request
+    validated = get_images_from_request(request, 2)
+    if validated['files'] is None:
+        return validated['error'], validated['status']
 
-    img_file_2 = request.files.get("image2")
-    if not img_file_2:
-        return "image2 is required", 400
+    img_buf, img_format = image_service.image_difference(validated["files"][0], validated["files"][1])
 
-    img_format_1 = img_file_1.filename.split(".")[-1]
-    if not img_format_1 in ["jpg", "jpeg", "png"]:
-        return "invalid format for image1", 400
-    
-    img_format_2 = img_file_2.filename.split(".")[-1]
-    if not img_format_2 in ["jpg", "jpeg", "png"]:
-        return "invalid format for image2", 400
-
-    img_buf = image_service.image_difference(img_file_1, img_file_2)
-
-    return send_file(img_buf, mimetype="image/" + img_format_1)
+    return send_file(img_buf, mimetype="image/" + img_format)
 
 @app.route("/api/image-hash", methods=["POST"])
 def image_hash():
     """
     Given an image, return the hash of the image
     """
-    img_file = request.files.get("image")
-    if not img_file:
-        return "image is required", 400
+    # Get image from request
+    validated = get_images_from_request(request)
+    if validated['files'] is None:
+        return validated['error'], validated['status']
 
-    img_format = img_file.filename.split(".")[-1]
-    if not img_format in ["jpg", "jpeg", "png"]:
-        return "invalid format", 400
-
-    img_hash = image_service.image_hash(img_file)
+    img_hash = image_service.image_hash(validated['files'][0])
 
     # Return the hash as a string in json, so it can be parsed by javascript
     return f'{{"hash": "{img_hash}"}}'

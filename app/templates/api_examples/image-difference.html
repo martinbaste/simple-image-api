@@ -16,8 +16,10 @@
         Method: POST
         Content-Type: multipart/form-data
         Body:
-            image1: <image1>
-            image2: <image2>
+            image: <image>
+            image_2: <image_2>
+            image_url: <image_url>
+            image_2_url: <image_url>
     </pre>
 
     <h2>Response format</h2>
@@ -32,8 +34,10 @@
 
     <h2>Example</h2>
     <form action="/api/image-difference" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image1" />
-        <input type="file" name="image2" />
+        <input type="file" name="image" />
+        <input type="file" name="image_2" />
+        <input type="url" name="image_url" />
+        <input type="url" name="image_2_url" />
         <input type="submit" value="Submit" />
     </form>
 
