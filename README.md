@@ -19,7 +19,7 @@ cd simple-image-api
 bash docker_start.sh
 ```
 
-Server is accessible at http://localhost:8080/
+Server with docs page is accessible at http://localhost:8080/
 
 ## Setup (virtual environment)
 
@@ -48,6 +48,8 @@ pip install -r requirements.txt
 ```
 bash dev_start.sh
 ```
+
+Server with docs page is accessible at http://localhost:8080/
 
 ## To improve
 

@@ -4,7 +4,7 @@ from io import BytesIO
 
 def center_crop(img_file, width, height):
     """
-    Given width, height and an image. Crop it from the center with width and height
+    Given width, height and an image. Crop it from the center with specified width and height.
     """
     #img_format = img_file.filename.split(".")[-1]
     img = Image.open(img_file)
@@ -23,7 +23,13 @@ def center_crop(img_file, width, height):
 def image_difference(img_file_1, img_file_2):
     """
     Given two images, return the difference between them.
-    Returns image in the same format as img_file_1
+    It substracts the pixel values of the two images and returns the difference.
+
+    Assumes that the images are the same size and format.
+    Useful when used to identify 'raw' change between images, 
+    for example to quantify growth of a plant, movement, etc.
+
+    Returns image in the same format as img_file_1.
     """
     img_1 = Image.open(img_file_1)
     img_format = img_1.format
@@ -38,8 +44,12 @@ def image_difference(img_file_1, img_file_2):
 def image_hash(img_file):
     """
     Given an image, return the hash of the image
-    We can't get the hash of the file because the timestamp can be different for each image
+    We can't get the hash of the image file because the timestamp can be different for each image.
     Using this solution: https://stackoverflow.com/questions/49689550/simple-hash-of-pil-image
+    Basically, reduce the image to a 10x10 pixel image, and then calculate the average pixel value.
+    Then get an string of 1/0 values, where 1 is a pixel with a value greater than the average, 
+    and 0 is a pixel with a value less than the average.
+    Finally, convert the binary string into hex representation, and return it.
     """
     img = Image.open(img_file)
 
