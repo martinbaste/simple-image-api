@@ -42,9 +42,13 @@ def get_images_from_request(request, num_files=1):
 def download_file(file_url):
     """
     Given a url, download the file and return the file buffer
+    NOTE: I'd secure this function to prevent attacks:
+        - Prevent files that are too big
+        - Whitelist domains
+        - Other potential security issues when downloading arbitrary files?
     """
    
-    response = requests.get(file_url, stream=True, verify=False)
+    response = requests.get(file_url, stream=True)
     if response.status_code != 200:
         return None
     return response.raw

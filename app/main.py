@@ -72,7 +72,7 @@ def image_hash():
     img_hash = image_service.image_hash(validated['files'][0])
 
     # Return the hash as a string in json, so it can be parsed by javascript
-    return f'{{"hash": "{img_hash}"}}'
+    return f'{{ "data": {{"hash": "{img_hash}"}}}}'
 
 
 if __name__ == "__main__":

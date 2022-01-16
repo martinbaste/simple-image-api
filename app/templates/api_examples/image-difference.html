@@ -16,29 +16,37 @@
         Method: POST
         Content-Type: multipart/form-data
         Body:
-            image: <image>
-            image_2: <image_2>
-            image_url: <image_url>
-            image_2_url: <image_url>
+            image: &lt;file&gt; (or) image_url: &lt;string&gt;
+            image_2: &lt;file&gt; (or) image_url_2: &lt;string&gt;
     </pre>
 
     <h2>Response format</h2>
     <pre>
-        {
-            "status": "success",
-            "data": {
-                "image": <image>
-            }
-        }
+        &lt;file&gt;
     </pre>
+
 
     <h2>Example</h2>
     <form action="/api/image-difference" method="POST" enctype="multipart/form-data">
+      <div>
+        <label for="image">Image:</label>
         <input type="file" name="image" />
+      </div>
+      <div>
+        <label for="image_2">Image 2:</label>
         <input type="file" name="image_2" />
+      </div>
+      <div>
+        <label for="image_url">Image URL:</label>
         <input type="url" name="image_url" />
+      </div>
+      <div>
+        <label for="image_2_url">Image 2 URL:</label>
         <input type="url" name="image_2_url" />
+      </div>
+      <div>
         <input type="submit" value="Submit" />
+      </div>
     </form>
 
   </body>

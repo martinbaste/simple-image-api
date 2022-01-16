@@ -8,4 +8,4 @@ docker build -t ${app} .
 #   --name=${app} ${app}# \
   #-v $PWD:/app ${app}
 
-docker run -d -p 56733:80 ${app}
+docker run -d -p 8080:80 ${app}

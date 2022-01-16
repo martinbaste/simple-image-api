@@ -16,29 +16,37 @@
         Method: POST
         Content-Type: multipart/form-data
         Body:
-            width: <width>
-            height: <height>
-            image: <image>
-            image_url: <image_url>
+            width: &lt;integer&gt;
+            height: &lt;integer&gt;
+            image: &lt;file&gt; (or) image_url: &lt;string&gt;
     </pre>
 
     <h2>Response format</h2>
     <pre>
-        {
-            "status": "success",
-            "data": {
-                "image": <image>
-            }
-        }
+        &lt;file&gt;
     </pre>
 
     <h2>Example</h2>
     <form action="/api/center-crop" method="POST" enctype="multipart/form-data">
-        <input type="number" name="width" placeholder="width" />
-        <input type="number" name="height" placeholder="height" />
+      <div>
+        <label for="width">Width:</label>
+        <input type="number" name="width" />
+      </div>
+      <div>
+        <label for="height">Height:</label>
+        <input type="number" name="height" />
+      </div>
+      <div>
+        <label for="image">Image:</label>
         <input type="file" name="image" />
+      </div>
+      <div>
+        <label for="image_url">Image URL:</label>
         <input type="url" name="image_url" />
+      </div>
+      <div>
         <input type="submit" value="Submit" />
+      </div>
     </form>
 
   </body>
