@@ -48,3 +48,9 @@ pip install -r requirements.txt
 ```
 bash dev_start.sh
 ```
+
+## To improve
+
+* Base image should be an official python base image
+* Switch from venv to poetry
+* Make sure no vulnerabilities are exposed when downloading images from URLs
